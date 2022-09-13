@@ -38,7 +38,7 @@ class RemoteBookItemDataStore : BookItemDataStore {
     }
 
     override suspend fun getBookItemList(searchData: SearchData, request: Int): NetworkStatus {
-        return NetworkClient.post<BookItemData>(NetworkConst.BOOK_ITEM_SEARCH, data = searchData, request = request )
+        return NetworkClient.post<List<BookItemData>>(NetworkConst.BOOK_ITEM_SEARCH, data = searchData, request = request )
     }
 
     override suspend fun getLoanedBookItemList(

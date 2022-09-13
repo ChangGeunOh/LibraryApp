@@ -9,6 +9,9 @@ import androidx.navigation.NavController
 import kr.pe.paran.library_app.component.GenieBookReserveDialog
 import kr.pe.paran.library_app.component.GenieSearchView
 import kr.pe.paran.library_app.model.BookItemData
+import kr.pe.paran.library_app.model.BookItemStatusData
+import kr.pe.paran.library_app.model.type.BookStatus
+import kr.pe.paran.library_app.model.type.ReservationStatus
 import kr.pe.paran.library_app.network.NetworkConst
 import kr.pe.paran.library_app.network.NetworkStatus
 import kr.pe.paran.library_app.repository.local.LocalCacheDataStore
@@ -26,7 +29,7 @@ fun BookItemReservationScreen(
 ) {
 
     val networkStatus by viewModel.networkStatus.collectAsState()
-    var bookItemList by remember { mutableStateOf(emptyList<BookItemData>()) }
+    var bookItemList by remember { mutableStateOf(mutableListOf<BookItemData>()) }
     var bookItemData by remember { mutableStateOf<BookItemData?>(null) }
 
     val memberData by memberViewModel.memberData.collectAsState()
@@ -36,7 +39,13 @@ fun BookItemReservationScreen(
             val request = (networkStatus as NetworkStatus.SUCCESS).request
             if (request == NetworkConst.REQUEST_SEARCH_BOOK_ITEM) {
                 @Suppress("UNCHECKED_CAST")
-                bookItemList = (networkStatus as NetworkStatus.SUCCESS).data as List<BookItemData>
+                bookItemList = (networkStatus as NetworkStatus.SUCCESS).data as MutableList<BookItemData>
+            } else if (request == NetworkConst.REQUEST_STATUS_BOOK_ITEM) {
+                val bookItemData = (networkStatus as NetworkStatus.SUCCESS).data as BookItemData
+                val index = bookItemList.indexOfFirst { it.id == bookItemData.id }
+                if (index > -1) {
+                    bookItemList.set(index = index, bookItemData)
+                }
             }
         }
         else -> {}
@@ -65,7 +74,14 @@ fun BookItemReservationScreen(
             },
             onClickReserve = { data ->
                 // Login 정보가 필요함..
+                val bookItemStatusData = BookItemStatusData(
+                    bookItemBarCode = data.barCode,
+                    memberCardCode = memberData.cardNumber,
+                    bookItemStatus = if (data.status == BookStatus.Available) BookStatus.Reserved else data.status,
+                    reservationStatus = if (data.status == BookStatus.Loaned) ReservationStatus.Waiting else ReservationStatus.Completed
+                )
                 viewModel.updateBookItemStatus(memberData.cardNumber, data.barCode)
+                viewModel.updateBookItemStatus(bookItemStatusData = bookItemStatusData)
                 bookItemData = null
             }
         )

@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kr.pe.paran.library_app.network.NetworkStatus
+import kr.pe.paran.library_app.utils.Logcat
 
 interface ViewModelInterface {
 
@@ -14,11 +15,6 @@ interface ViewModelInterface {
      */
 
     var _networkStatus: MutableStateFlow<NetworkStatus>
-        get() = MutableStateFlow<NetworkStatus>(NetworkStatus.IDLE)
-        set(value)  {
-            _networkStatus.value = value.value
-        }
-
     val networkStatus: StateFlow<NetworkStatus>
         get() = _networkStatus.asStateFlow()
 
@@ -32,10 +28,6 @@ interface ViewModelInterface {
     }
 
     var _message: MutableStateFlow<String>
-        get() = MutableStateFlow("")
-        set(value) {
-            _message.value = value.value
-        }
     val message: StateFlow<String>
         get() = _message.asStateFlow()
 

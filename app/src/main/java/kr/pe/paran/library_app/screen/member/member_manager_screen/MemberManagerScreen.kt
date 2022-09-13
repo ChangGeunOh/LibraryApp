@@ -73,7 +73,7 @@ fun MemberManagerScreen(
                 zipCode = zipCode,
                 address = roadAddress
             )
-            viewModel.setMemberData(memberData.copy(personData = memberData!!.personData.copy(addressData = addressData)))
+            viewModel.setMemberData(memberData.copy(personData = memberData.personData.copy(addressData = addressData)))
             isShowAddressDialog = false
         },
             onDismissDialog = { isShowAddressDialog = false }

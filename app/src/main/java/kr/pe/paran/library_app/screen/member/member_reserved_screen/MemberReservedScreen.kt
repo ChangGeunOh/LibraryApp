@@ -1,20 +1,32 @@
 package kr.pe.paran.library_app.screen.member.member_reserved_screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kr.pe.paran.library_app.navigation.Screen
 import kr.pe.paran.library_app.screen.member.MemberViewModel
+import kr.pe.paran.library_app.utils.Logcat
 
 @Composable
 fun MemberReservedScreen(
     navController: NavController,
-    viewModel: MemberViewModel = hiltViewModel()
+    viewModel: MemberViewModel = hiltViewModel(),
+    memberViewModel: MemberViewModel = hiltViewModel()
 ) {
 
     val bookItemList by viewModel.reservedBookItemList.collectAsState()
+    val memberData by memberViewModel.memberData.collectAsState()
+
+    Logcat.i("BookItemList>${bookItemList.toString()}")
+
+    LaunchedEffect(key1 = memberData, block = {
+        if (memberData.cardNumber.isNotEmpty()) {
+            viewModel.getBookItemList(memberCardNo = memberData.cardNumber)
+        }
+    })
 
     MemberReservedContent(
         bookItemList = bookItemList,

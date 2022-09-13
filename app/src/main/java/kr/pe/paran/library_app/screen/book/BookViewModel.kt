@@ -24,6 +24,7 @@ import kr.pe.paran.library_app.network.NetworkConst.REQUEST_UPDATE_BOOK_ITEM
 import kr.pe.paran.library_app.network.NetworkStatus
 import kr.pe.paran.library_app.repository.Repository
 import kr.pe.paran.library_app.screen.ViewModelInterface
+import kr.pe.paran.library_app.utils.Logcat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +32,10 @@ class BookViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel(), ViewModelInterface {
 
-    /** BookViewModel Common ------------------------------> */
+    override var _networkStatus: MutableStateFlow<NetworkStatus> = MutableStateFlow(NetworkStatus.IDLE)
+    override var _message: MutableStateFlow<String> = MutableStateFlow("")
 
+    /** BookViewModel Common ------------------------------> */
     private suspend fun loadBookItem(barCode: String): Any? {
         _networkStatus.value = NetworkStatus.LOADING
         val networkStatus =
@@ -42,7 +45,6 @@ class BookViewModel @Inject constructor(
     }
 
     /** <------------------------------ BookViewModel Common */
-
 
 
     fun insertBookData(bookData: BookData) {
@@ -198,8 +200,11 @@ class BookViewModel @Inject constructor(
     fun searchBookItem(query: String) {
         _networkStatus.value = NetworkStatus.LOADING
         viewModelScope.launch {
-            _networkStatus.value =
+            val networkStatus =
                 repository.searchBookItem(query = query, request = REQUEST_SEARCH_BOOK_ITEM)
+            Logcat.i(":::::${networkStatus.toString()}")
+            setNetworkStatus(networkStatus)
+
         }
     }
 
@@ -213,6 +218,18 @@ class BookViewModel @Inject constructor(
             )
             _networkStatus.value = repository.updateBookItemStatus(
                 reserveData = reserveData,
+                request = REQUEST_STATUS_BOOK_ITEM
+            )
+            clearNetworkState()
+        }
+    }
+
+    fun updateBookItemStatus(bookItemStatusData: BookItemStatusData) {
+
+        _networkStatus.value = NetworkStatus.LOADING
+        viewModelScope.launch {
+            _networkStatus.value = repository.updateBookItemStatus(
+                reserveData = bookItemStatusData,
                 request = REQUEST_STATUS_BOOK_ITEM
             )
             clearNetworkState()

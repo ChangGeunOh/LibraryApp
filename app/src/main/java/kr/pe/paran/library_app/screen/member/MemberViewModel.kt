@@ -24,6 +24,9 @@ class MemberViewModel @Inject constructor(
     val repository: Repository
 ) : ViewModel(), ViewModelInterface {
 
+    override var _networkStatus: MutableStateFlow<NetworkStatus> = MutableStateFlow(NetworkStatus.IDLE)
+    override var _message: MutableStateFlow<String> = MutableStateFlow("")
+
     fun saveMemberData(memberData: MemberData) {
         _networkStatus.value = NetworkStatus.LOADING
 
@@ -117,6 +120,7 @@ class MemberViewModel @Inject constructor(
                 type = SearchType.CARDNO
             )
             val networkStatus = repository.getBookItemList(searchData = searchData, request = REQUEST_MEMBER_RESERVED_BOOK_LIST)
+            Logcat.i("networkState>${networkStatus.toString()}")
             processNetworkStatus(networkStatus = networkStatus)?.let {
                 @Suppress("UNCHECKED_CAST")
                 _reservedBookItemList.value = it as MutableList<BookItemData>
