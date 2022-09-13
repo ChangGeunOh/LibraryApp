@@ -1,0 +1,263 @@
+{
+  "project_info": {
+    "project_number": "1028622171116",
+    "firebase_url": "https://project2022-f80fe-default-rtdb.firebaseio.com",
+    "project_id": "project2022-f80fe",
+    "storage_bucket": "project2022-f80fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:6cda49216ba3e3a7561ec9",
+        "android_client_info": {
+          "package_name": "kr.pa.paran.geniewatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:0aefd174855a13e1561ec9",
+        "android_client_info": {
+          "package_name": "kr.pa.paran.gigagenietv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:4c03fbfe525ed65f561ec9",
+        "android_client_info": {
+          "package_name": "kr.pe.paran.famousmoutaines.the_famous_mountains"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:93d65ab2349a65cd561ec9",
+        "android_client_info": {
+          "package_name": "kr.pe.paran.genietvwatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:88caa9d31edaec98561ec9",
+        "android_client_info": {
+          "package_name": "kr.pe.paran.library_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:705249853ae3a02b561ec9",
+        "android_client_info": {
+          "package_name": "kr.pe.paran.newsportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028622171116:android:8b5ae5e2ae5dd372561ec9",
+        "android_client_info": {
+          "package_name": "kr.pe.paran.wiselife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CvTHvCNcZkdtuKy7lqcuxp6fblcKx5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028622171116-j942qegtjmda78cdoinb80a71po9jjvc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028622171116-9p28g0741o301ce7jbe0ndje9aml5hlr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.pe.paran.famousmoutaines.theFamousMountains"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
