@@ -1,9 +1,6 @@
 package kr.pe.paran.library_app.screen.member.member_home_screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -15,17 +12,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
+import kr.pe.paran.library_app.model.MemberData
+import kr.pe.paran.library_app.screen.member.member_card_screen.MemberCardContent
+import kr.pe.paran.library_app.screen.member.member_card_screen.MemberCardScreen
+import kr.pe.paran.library_app.screen.member.member_loaned_screen.MemberLoanedContent
+import kr.pe.paran.library_app.screen.member.member_loaned_screen.MemberLoanedScreen
+import kr.pe.paran.library_app.screen.member.member_reserved_screen.MemberReservedContent
+import kr.pe.paran.library_app.screen.member.member_reserved_screen.MemberReservedScreen
 
 @ExperimentalPagerApi
 @Composable
-fun MemberHomeContent() {
+fun MemberHomeContent(
+    navController: NavController
+) {
     val pagerState = rememberPagerState()
+
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Tabs(pagerState = pagerState)
-        TabsContent(pagerState = pagerState)
+        TabsContent(pagerState = pagerState, navController = navController)
     }
 }
 
@@ -69,28 +77,13 @@ fun Tabs(pagerState: PagerState) {
 
 @ExperimentalPagerApi
 @Composable
-fun TabsContent(pagerState: PagerState) {
+fun TabsContent(pagerState: PagerState, navController: NavController) {
     HorizontalPager(state = pagerState, count = 3) { page ->
         when (page) {
-            0 -> TabContentScreen(data = "Welcome to Home Screen")
-            1 -> TabContentScreen(data = "Welcome to Shopping Screen")
-            2 -> TabContentScreen(data = "Welcome to Settings Screen")
+            0 -> MemberReservedScreen(navController = navController)
+            1 -> MemberLoanedScreen(navController = navController)
+            2 -> MemberCardScreen(navController = navController)
         }
     }
 }
 
-@Composable
-fun TabContentScreen(data: String) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = data,
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
-        )
-    }
-}

@@ -1,5 +1,9 @@
 import android.annotation.SuppressLint
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -38,7 +42,15 @@ fun MemberManagerScreen(
     Scaffold(topBar = {
         NavigationAppBar(
             title = "회원 관리",
-            onClickBack = { navController.popBackStack() })
+            onClickBack = { navController.popBackStack() },
+            actions = {
+                IconButton(onClick = {
+                    navController.navigate(Screen.MemberInsert.route)
+                }) {
+                    Icon(imageVector = Icons.Default.PersonAdd, contentDescription = "Member Add")
+                }
+            }
+        )
     }) {
         MemberManagerContent(
             onClickAddress = {
@@ -55,13 +67,13 @@ fun MemberManagerScreen(
         )
     }
 
-    if (isShowAddressDialog && memberData != null) {
+    if (isShowAddressDialog) {
         DaumAddressDialog(onFindAddress = { zipCode, roadAddress, _ ->
             val addressData = AddressData(
                 zipCode = zipCode,
                 address = roadAddress
             )
-            viewModel.setMemberData(memberData!!.copy(personData = memberData!!.personData.copy(addressData = addressData)))
+            viewModel.setMemberData(memberData.copy(personData = memberData!!.personData.copy(addressData = addressData)))
             isShowAddressDialog = false
         },
             onDismissDialog = { isShowAddressDialog = false }

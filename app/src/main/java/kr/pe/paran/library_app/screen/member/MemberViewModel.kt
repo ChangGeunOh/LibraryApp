@@ -1,15 +1,18 @@
 package kr.pe.paran.library_app.screen.member
 
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kr.pe.paran.library_app.model.BookItemData
-import kr.pe.paran.library_app.model.MemberData
-import kr.pe.paran.library_app.model.SearchData
+import kr.pe.paran.library_app.model.*
 import kr.pe.paran.library_app.model.type.SearchType
+import kr.pe.paran.library_app.network.NetworkConst.REQUEST_MEMBER_LOANED_BOOK_LIST
+import kr.pe.paran.library_app.network.NetworkConst.REQUEST_MEMBER_RESERVED_BOOK_LIST
 import kr.pe.paran.library_app.network.NetworkStatus
 import kr.pe.paran.library_app.repository.Repository
 import kr.pe.paran.library_app.screen.ViewModelInterface
@@ -30,9 +33,16 @@ class MemberViewModel @Inject constructor(
         }
     }
 
-
     // MemberData
-    private var _memberData = MutableStateFlow<MemberData?>(null)
+    private var _memberData = MutableStateFlow<MemberData>(
+        MemberData(
+            id = 1,
+            personData = PersonData(name = "진지현"),
+            cardNumber = "1234567890",
+            barCode = "1234-4567-8901-1234",
+            accountData = AccountData()
+        )
+    )
     val memberData = _memberData.asStateFlow()
 
     fun searchMemberData(query: String, searchType: SearchType) {
@@ -69,7 +79,7 @@ class MemberViewModel @Inject constructor(
 
         viewModelScope.launch {
             val networkStatus = repository.searchMemberList(searchData)
-            val data = processNetworkStatus(networkStatus =  networkStatus)
+            val data = processNetworkStatus(networkStatus = networkStatus)
             data?.let {
                 @Suppress("UNCHECKED_CAST")
                 _memberList.value = it as MutableList<MemberData>
@@ -94,5 +104,57 @@ class MemberViewModel @Inject constructor(
     }
 
     /** <--------------------------------- BookItemScreen.kt */
+
+    /** MemberReservedScreen.kt ---------------------------> */
+    private var _reservedBookItemList = MutableStateFlow<MutableList<BookItemData>>(mutableListOf())
+    val reservedBookItemList = _reservedBookItemList.asStateFlow()
+
+    fun getBookItemList(memberCardNo: String) {
+        _networkStatus.value = NetworkStatus.LOADING
+        viewModelScope.launch {
+            val searchData = SearchData(
+                query = memberCardNo,
+                type = SearchType.CARDNO
+            )
+            val networkStatus = repository.getBookItemList(searchData = searchData, request = REQUEST_MEMBER_RESERVED_BOOK_LIST)
+            processNetworkStatus(networkStatus = networkStatus)?.let {
+                @Suppress("UNCHECKED_CAST")
+                _reservedBookItemList.value = it as MutableList<BookItemData>
+            }
+        }
+    }
+
+    /** <----------------------------MemberReservedScreen.kt */
+
+    /** MemberLoanedScreen.kt -----------------------------> */
+    private var _loanedBookItemList = MutableStateFlow<MutableList<BookItemData>>(mutableListOf())
+    val loanedBookItemList = _loanedBookItemList.asStateFlow()
+
+    fun getLoanedBookItemList(memberCardNo: String) {
+        _networkStatus.value = NetworkStatus.LOADING
+        viewModelScope.launch {
+            val searchData = SearchData(
+                query = memberCardNo,
+                type = SearchType.CARDNO
+            )
+            val networkStatus = repository.getLoanedBookItemList(searchData = searchData, request = REQUEST_MEMBER_LOANED_BOOK_LIST)
+            processNetworkStatus(networkStatus = networkStatus)?.let {
+                @Suppress("UNCHECKED_CAST")
+                _reservedBookItemList.value = it as MutableList<BookItemData>
+            }
+        }
+    }
+    /** <----------------------------- MemberLoanedScreen.kt */
+
+    private var _loginMemberData = MutableStateFlow<MemberData>(MemberData())
+    var loginMemberData = _loginMemberData.asStateFlow()
+
+    fun loadLoginMemberData() {
+        viewModelScope.launch {
+            repository.loadLoginMemberData().collectLatest {
+                _loginMemberData.value = it
+            }
+        }
+    }
 
 }

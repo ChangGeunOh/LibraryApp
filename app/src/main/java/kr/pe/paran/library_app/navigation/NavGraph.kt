@@ -15,6 +15,7 @@ import kr.pe.paran.library_app.screen.book_item.book_item_insert_screen.BookItem
 import kr.pe.paran.library_app.screen.book_item.book_item_loan_screen.BookItemLoanScreen
 import kr.pe.paran.library_app.screen.book_item.book_item_manager_screen.BookItemManagerScreen
 import kr.pe.paran.library_app.screen.book_item.book_item_reservation_screen.BookItemReservationScreen
+import kr.pe.paran.library_app.screen.book_item.book_item_return_screen.BookItemReturnScreen
 import kr.pe.paran.library_app.screen.book_item.book_item_search_screen.BookItemSearchScreen
 import kr.pe.paran.library_app.screen.librarian.librarian_card_screen.LibrarianCardScreen
 import kr.pe.paran.library_app.screen.librarian.librarian_home_screen.LibrarianHomeScreen
@@ -34,7 +35,7 @@ import kr.pe.paran.library_app.screen.splash_screen.SplashScreen
 fun NavGraph(
     navHostController: NavHostController,
 ) {
-    NavHost(navController = navHostController, startDestination = Screen.LibrarianHome.route) {
+    NavHost(navController = navHostController, startDestination = Screen.Splash.route) {
 
         composable(route = Screen.Splash.route) {
             SplashScreen(navController = navHostController)
@@ -99,9 +100,15 @@ fun NavGraph(
         composable(route = Screen.BookItemReservation.route) {
             BookItemReservationScreen(navController = navHostController)
         }
+
         composable(route = Screen.BookItemLoan.route) {
             BookItemLoanScreen(navController = navHostController)
         }
+
+        composable(route = Screen.BookItemReturn.route) {
+            BookItemReturnScreen(navController = navHostController)
+        }
+
         composable(route = Screen.BookItemManager.route) {
             BookItemManagerScreen(navController = navHostController)
         }

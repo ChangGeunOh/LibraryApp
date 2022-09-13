@@ -3,6 +3,7 @@ package kr.pe.paran.library_app.network
 object NetworkConst {
 
 
+
     private const val BASE_URL = "http://172.30.1.61:8089"
 
     const val MEMBER = "$BASE_URL/member"
@@ -15,6 +16,10 @@ object NetworkConst {
     const val BOOK_ITEM = "$BASE_URL/book_item"
     const val BOOK_ITEM_RESERVE = "$BASE_URL/book_item/status"
     const val BOOK_ITEM_BARCODE = "$BASE_URL/book_item/barcode"
+    const val BOOK_ITEM_SEARCH = "$BASE_URL/book_item/search"
+    const val BOOK_ITEM_LOANED = "$BASE_URL/book_item/loaned"
+    const val BOOK_ITEM_RESERVED = "$BASE_URL/book_item/reserved"
+
 
     const val REQUEST_SEARCH_AUTHOR = 1000
     const val REQUEST_INSERT_AUTHOR = 1100
@@ -30,5 +35,8 @@ object NetworkConst {
     const val REQUEST_UPDATE_BOOK_ITEM = 3500
 
     const val REQUEST_CODE_MEMBER = 4000
+
+    const val REQUEST_MEMBER_RESERVED_BOOK_LIST = 5000
+    const val REQUEST_MEMBER_LOANED_BOOK_LIST = 5010
 
 }

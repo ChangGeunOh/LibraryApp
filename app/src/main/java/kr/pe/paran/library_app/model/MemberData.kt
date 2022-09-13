@@ -1,7 +1,5 @@
 package kr.pe.paran.library_app.model
 
-import kr.pe.paran.library_app.network.NetworkStatus
-
 @kotlinx.serialization.Serializable
 data class MemberData(
     val id: Int = -1,
@@ -15,5 +13,4 @@ data class MemberData(
     fun isValid(): Boolean {
         return personData.isNotEmpty() && accountData.isNotEmpty()
     }
-
 }

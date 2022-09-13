@@ -127,7 +127,7 @@ fun MemberManagerContent(
                 enabled = false
             )
 
-            GenieBarCodeView(barCode = memberData.barCode, isShowShareIcon = true)
+            GenieBarCodeView(barCode = memberData.barCode, isShowShareIcon = false)
 
             Spacer(modifier = Modifier.height(16.dp))
             GenieRoundedButton(

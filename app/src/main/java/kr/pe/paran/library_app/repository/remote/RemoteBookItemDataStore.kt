@@ -2,6 +2,7 @@ package kr.pe.paran.library_app.repository.remote
 
 import kr.pe.paran.library_app.model.BookItemData
 import kr.pe.paran.library_app.model.BookItemStatusData
+import kr.pe.paran.library_app.model.SearchData
 import kr.pe.paran.library_app.network.NetworkClient
 import kr.pe.paran.library_app.network.NetworkStatus
 import kr.pe.paran.library_app.network.NetworkConst
@@ -35,4 +36,16 @@ class RemoteBookItemDataStore : BookItemDataStore {
     override suspend fun getBookItem(barcode: String, request: Int): NetworkStatus {
         return NetworkClient.get<BookItemData>(NetworkConst.BOOK_ITEM_BARCODE, data = barcode, request =  request)
     }
+
+    override suspend fun getBookItemList(searchData: SearchData, request: Int): NetworkStatus {
+        return NetworkClient.post<BookItemData>(NetworkConst.BOOK_ITEM_SEARCH, data = searchData, request = request )
+    }
+
+    override suspend fun getLoanedBookItemList(
+        searchData: SearchData,
+        request: Int
+    ): NetworkStatus {
+        return NetworkClient.post<List<BookItemData>>(NetworkConst.BOOK_ITEM_LOANED, data = searchData, request = request)
+    }
+
 }

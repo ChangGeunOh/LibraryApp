@@ -16,6 +16,9 @@ sealed class Screen(val route: String) {
     object MemberManager: Screen("member_manager_screen")
     object MemberSearch: Screen("member_search_screen")
 
+    object MemberReserved: Screen("member_reserved_screen")
+    object MemberLoaned: Screen("member_loaned_screen")
+
     object LibrarianMenu: Screen("librarian_menu_screen")
     object LibrarianHome: Screen("librarian_home_screen")
     object LibrarianCard: Screen("librarian_card_screen")

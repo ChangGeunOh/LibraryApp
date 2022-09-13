@@ -11,8 +11,9 @@ import kr.pe.paran.library_app.component.GenieSearchView
 import kr.pe.paran.library_app.model.BookItemData
 import kr.pe.paran.library_app.network.NetworkConst
 import kr.pe.paran.library_app.network.NetworkStatus
-import kr.pe.paran.library_app.repository.local.LocalDataStore
+import kr.pe.paran.library_app.repository.local.LocalCacheDataStore
 import kr.pe.paran.library_app.screen.book.BookViewModel
+import kr.pe.paran.library_app.screen.member.MemberViewModel
 import kr.pe.paran.library_app.utils.Logcat
 
 @ExperimentalComposeUiApi
@@ -20,12 +21,15 @@ import kr.pe.paran.library_app.utils.Logcat
 @Composable
 fun BookItemReservationScreen(
     navController: NavController,
-    viewModel: BookViewModel = hiltViewModel()
+    viewModel: BookViewModel = hiltViewModel(),
+    memberViewModel: MemberViewModel = hiltViewModel()
 ) {
 
     val networkStatus by viewModel.networkStatus.collectAsState()
     var bookItemList by remember { mutableStateOf(emptyList<BookItemData>()) }
     var bookItemData by remember { mutableStateOf<BookItemData?>(null) }
+
+    val memberData by memberViewModel.memberData.collectAsState()
 
     when (networkStatus) {
         is NetworkStatus.SUCCESS -> {
@@ -61,7 +65,7 @@ fun BookItemReservationScreen(
             },
             onClickReserve = { data ->
                 // Login 정보가 필요함..
-                viewModel.updateBookItemStatus(LocalDataStore.memberCardCode, data.barCode)
+                viewModel.updateBookItemStatus(memberData.cardNumber, data.barCode)
                 bookItemData = null
             }
         )

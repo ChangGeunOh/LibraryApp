@@ -2,6 +2,7 @@ package kr.pe.paran.library_app.repository
 
 import kr.pe.paran.library_app.model.BookItemData
 import kr.pe.paran.library_app.model.BookItemStatusData
+import kr.pe.paran.library_app.model.SearchData
 import kr.pe.paran.library_app.network.NetworkStatus
 
 interface BookItemDataStore {
@@ -12,4 +13,6 @@ interface BookItemDataStore {
     suspend fun searchBookItemList(query: String, request: Int): NetworkStatus
     suspend fun updateBookItemStatus(reserveData: BookItemStatusData, request: Int): NetworkStatus
     suspend fun getBookItem(barcode: String, request: Int): NetworkStatus
+    suspend fun getBookItemList(searchData: SearchData, request: Int): NetworkStatus
+    suspend fun getLoanedBookItemList(searchData: SearchData, request: Int): NetworkStatus
 }

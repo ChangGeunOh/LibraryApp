@@ -7,6 +7,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -20,6 +22,8 @@ fun MemberHomeScreen(
     navController: NavController,
     viewModel: MemberViewModel = hiltViewModel()
 ) {
+
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -27,14 +31,9 @@ fun MemberHomeScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 title = { Text("Genie 도서관") },
-                actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = "")
-                    }
-                }
             )
         }
     ) {
-        MemberHomeContent()
+        MemberHomeContent(navController = navController)
     }
 }

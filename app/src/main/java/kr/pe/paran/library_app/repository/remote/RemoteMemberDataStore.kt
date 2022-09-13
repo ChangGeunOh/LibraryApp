@@ -11,6 +11,8 @@ import kr.pe.paran.library_app.repository.MemberDataStore
 
 class RemoteMemberDataStore : MemberDataStore {
 
+    private var _memberData: MemberData = MemberData()
+
     override suspend fun insertMember(memberData: MemberData): NetworkStatus {
         return NetworkClient.post<MemberData>(NetworkConst.MEMBER, memberData)
     }
@@ -46,6 +48,7 @@ class RemoteMemberDataStore : MemberDataStore {
     override suspend fun searchMemberList(searchData: SearchData): NetworkStatus {
         return NetworkClient.post<List<MemberData>>(NetworkConst.MEMBER_SEARCH, searchData)
     }
+
 
 }
 

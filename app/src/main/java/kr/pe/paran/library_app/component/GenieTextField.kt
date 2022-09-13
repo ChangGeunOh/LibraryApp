@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
@@ -19,10 +21,12 @@ fun GenieTextField(
     text: String = "",
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
+    isPassword: Boolean = false,
     onValueChange: (String) -> Unit = { _ -> }
 ) {
 
     var value by remember { mutableStateOf(text) }
+    LaunchedEffect(key1 = text, block = {value = text})
 
     TextField(
         value = value,
@@ -34,6 +38,7 @@ fun GenieTextField(
         label = { Text(text = label) },
         textStyle = TextStyle(textAlign = TextAlign.Center),
         modifier = modifier.fillMaxWidth(),
+        visualTransformation = if (isPassword) PasswordVisualTransformation()  else VisualTransformation.None,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.LightGray

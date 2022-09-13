@@ -14,7 +14,8 @@ data class BookItemData(
     var rackLocationIdentifier: String = "",
     var status: BookStatus = BookStatus.Available,
     val borrowDate: Long = 0L,
-    val dueDate: Long = 0L
+    val dueDate: Long = 0L,
+    val reserveData: ReserveData = ReserveData()
 ) {
     fun getPurchaseDate(): String {
         return SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(purchaseDate)

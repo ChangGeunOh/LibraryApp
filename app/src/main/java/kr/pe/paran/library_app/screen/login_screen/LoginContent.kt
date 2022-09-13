@@ -3,6 +3,7 @@ package kr.pe.paran.library_app.screen.login_screen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedButton
@@ -26,54 +27,63 @@ fun LoginContent(
     onClickLogin: (Boolean, String, String) -> Unit = {isMember, userid, userpw -> }
 ) {
 
-    var isMember by remember { mutableStateOf(false) }
+    var isMember by remember { mutableStateOf(true) }
     var userid by remember { mutableStateOf("") }
     var userpw by remember { mutableStateOf("") }
+    
+    LaunchedEffect(key1 = isMember, block = {
+        userid = if(isMember) "11111111" else "99999999"
+        userpw = if(isMember) "11111111" else "99999999"
+    })
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 64.dp),
+            .padding(horizontal = 48.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Image(
-            modifier = Modifier
-                .padding(top = 80.dp, bottom = 80.dp)
-                .size(200.dp),
-            painter = painterResource(id = R.drawable.img_library_logo),
-            contentDescription = "Logo"
-        )
+        item {
+            Image(
+                modifier = Modifier
+                    .padding(top = 48.dp, bottom = 48.dp)
+                    .size(200.dp),
+                painter = painterResource(id = R.drawable.img_library_logo),
+                contentDescription = "Logo"
+            )
 
-        LoginSegment(onClickItem = { value ->
-            isMember = value == 0
-        })
+            LoginSegment(onClickItem = { value ->
+                isMember = value == 0
+            })
 
-        Spacer(modifier = Modifier.height(16.dp))
-        GenieTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "사용자 ID",
-            onValueChange = { value -> userid = value }
-        )
+            Spacer(modifier = Modifier.height(8.dp))
+            GenieTextField(
+                modifier = Modifier.fillMaxWidth(),
+                label = "사용자 ID",
+                text = userid,
+                onValueChange = { value -> userid = value }
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
-        GenieTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "비밀번호",
-            onValueChange = { value -> userpw = value }
-        )
+            Spacer(modifier = Modifier.height(8.dp))
+            GenieTextField(
+                modifier = Modifier.fillMaxWidth(),
+                label = "비밀번호",
+                text = userpw,
+                isPassword = true,
+                onValueChange = { value -> userpw = value }
+            )
 
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            modifier = Modifier
-                .fillMaxWidth(),
-            onClick = {
-                onClickLogin(isMember, userid, userpw)
-            }) {
-            Text(text = "LogIn")
+            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onClick = {
+                    onClickLogin(isMember, userid, userpw)
+                }) {
+                Text(text = "LogIn")
+            }
         }
     }
-
 }
 
 @Composable

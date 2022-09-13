@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kr.pe.paran.library_app.model.AccountData
+import kr.pe.paran.library_app.model.LibrarianData
+import kr.pe.paran.library_app.model.MemberData
+import kr.pe.paran.library_app.model.type.AccountType
 import kr.pe.paran.library_app.network.NetworkStatus
 import kr.pe.paran.library_app.repository.Repository
 import javax.inject.Inject
@@ -23,16 +26,24 @@ class LoginViewModel @Inject constructor(
     fun login(accountData: AccountData) {
         _networkStatus.value = NetworkStatus.LOADING
         viewModelScope.launch {
-            _networkStatus.value = repository.login(accountData = accountData)
-            Log.i(":::::", "NetworkStatus:::::${_networkStatus.value.toString()}")
+            if (accountData.accountType == AccountType.MEMBER) {
+                _networkStatus.value = repository.loginMember(accountData = accountData)
+            } else {
+                _networkStatus.value = repository.loginLibrarian(accountData = accountData)
+            }
         }
     }
 
-    fun loginLibrarian(accountData: AccountData) {
-        _networkStatus.value = NetworkStatus.LOADING
+    fun setMemberData(memberData: MemberData) {
         viewModelScope.launch {
-            _networkStatus.value = repository.loginLibrarian(accountData = accountData)
+            repository.setMemberData(memberData)
         }
-
     }
+
+    fun setLibrarianData(librarianData: LibrarianData) {
+        viewModelScope.launch {
+            repository.setLibrarianData(librarianData = librarianData)
+        }
+    }
+
 }

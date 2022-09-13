@@ -1,10 +1,13 @@
 package kr.pe.paran.library_app.repository
 
+import kotlinx.coroutines.flow.Flow
 import kr.pe.paran.library_app.model.*
 import kr.pe.paran.library_app.network.NetworkStatus
+import kr.pe.paran.library_app.repository.local.LocalCacheDataStore
 import javax.inject.Inject
 
 class Repository @Inject constructor(
+    private val localDataStore: LocalCacheDataStore,
     private val memberDataStore: MemberDataStore,
     private val bookDataStore: BookDataStore,
     private val bookItemDataStore: BookItemDataStore
@@ -14,7 +17,7 @@ class Repository @Inject constructor(
          return memberDataStore.insertMember(memberData = memberData)
      }
 
-    suspend fun login(accountData: AccountData): NetworkStatus {
+    suspend fun loginMember(accountData: AccountData): NetworkStatus {
         return memberDataStore.loadMember(accountData = accountData)
     }
 
@@ -75,6 +78,26 @@ class Repository @Inject constructor(
 
     suspend fun updateMemberData(memberData: MemberData): NetworkStatus {
         return memberDataStore.updateMember(memberData = memberData)
+    }
+
+    suspend fun getBookItemList(searchData: SearchData, request: Int): NetworkStatus {
+        return bookItemDataStore.getBookItemList(searchData, request = request)
+    }
+
+    suspend fun getLoanedBookItemList(searchData: SearchData, request: Int): NetworkStatus {
+        return bookItemDataStore.getLoanedBookItemList(searchData = searchData, request = request)
+    }
+
+    suspend fun setMemberData(memberData: MemberData) {
+        localDataStore.saveMemberData(memberData)
+    }
+
+    suspend fun setLibrarianData(librarianData: LibrarianData) {
+        localDataStore.saveLibrarianData(librarianData = librarianData)
+    }
+
+    suspend fun loadLoginMemberData(): Flow<MemberData> {
+        return localDataStore.loadMemberData()
     }
 
 

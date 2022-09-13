@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kr.pe.paran.library_app.R
+import kr.pe.paran.library_app.component.GenieRoundedButton
 import kr.pe.paran.library_app.model.AccountData
 import kr.pe.paran.library_app.model.MemberData
 import kr.pe.paran.library_app.model.PersonData
@@ -33,8 +34,10 @@ fun MemberCardContent(
         personData = PersonData(name = "진지현"),
         cardNumber = "1234567890",
         barCode = "1234-4567-8901-1234",
-        accountData = AccountData()
-    )
+        accountData = AccountData(),
+    ),
+    onClickEdit: (MemberData) -> Unit = {},
+    isShowButton: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -90,10 +93,15 @@ fun MemberCardContent(
                 }
             }
         }
+        if (isShowButton) {
+            GenieRoundedButton(
+                text = "수정하기",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+            ) {
+                onClickEdit(memberData)
+            }
+        }
     }
 }
-
-
-/*
-
- */
