@@ -68,6 +68,7 @@ class Repository @Inject constructor(
         return memberDataStore.getMemberData(cardNo = cardNo, request = request )
     }
 
+
     suspend fun searchMemberData(searchData: SearchData): NetworkStatus {
         return memberDataStore.searchMemberData(searchData = searchData)
     }
@@ -98,6 +99,18 @@ class Repository @Inject constructor(
 
     suspend fun loadLoginMemberData(): Flow<MemberData> {
         return localDataStore.loadMemberData()
+    }
+
+    suspend fun saveToken(token: String) {
+        localDataStore.saveToken(token = token)
+    }
+
+    suspend fun loadToken(): Flow<String> {
+        return localDataStore.loadToken()
+    }
+
+    suspend fun putMemberData(data: Any): NetworkStatus {
+        return memberDataStore.putMemberData(data = data)
     }
 
 

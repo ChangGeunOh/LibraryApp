@@ -17,4 +17,5 @@ interface MemberDataStore {
     suspend fun getMemberData(cardNo: String, request: Int): NetworkStatus
     suspend fun searchMemberData(searchData: SearchData): NetworkStatus
     suspend fun searchMemberList(searchData: SearchData): NetworkStatus
+    suspend fun putMemberData(data: Any): NetworkStatus
 }

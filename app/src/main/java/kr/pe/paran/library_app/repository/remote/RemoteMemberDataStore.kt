@@ -49,6 +49,9 @@ class RemoteMemberDataStore : MemberDataStore {
         return NetworkClient.post<List<MemberData>>(NetworkConst.MEMBER_SEARCH, searchData)
     }
 
+    override suspend fun putMemberData(data: Any): NetworkStatus {
+        return NetworkClient.put<Any>(NetworkConst.MEMBER, data)
+    }
 
 }
 

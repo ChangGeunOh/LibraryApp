@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import kr.pe.paran.library_app.navigation.Screen
 import kr.pe.paran.library_app.screen.member.MemberViewModel
 import kr.pe.paran.library_app.utils.Logcat
+import java.util.logging.Logger
 
 @Composable
 fun MemberReservedScreen(
@@ -18,9 +19,13 @@ fun MemberReservedScreen(
 ) {
 
     val bookItemList by viewModel.reservedBookItemList.collectAsState()
-    val memberData by memberViewModel.memberData.collectAsState()
+    val memberData by memberViewModel.loginMemberData.collectAsState()
 
-    Logcat.i("BookItemList>${bookItemList.toString()}")
+    LaunchedEffect(key1 = Unit, block = {
+        memberViewModel.loadLoginMemberData()
+    })
+
+    Logcat.i(":::::${memberData.toString()}")
 
     LaunchedEffect(key1 = memberData, block = {
         if (memberData.cardNumber.isNotEmpty()) {

@@ -12,6 +12,8 @@ import kr.pe.paran.library_app.model.MemberData
 import kr.pe.paran.library_app.model.type.AccountType
 import kr.pe.paran.library_app.navigation.Screen
 import kr.pe.paran.library_app.network.NetworkStatus
+import kr.pe.paran.library_app.repository.local.LocalTemporaryDataStore
+import kr.pe.paran.library_app.utils.Logcat
 
 @Composable
 fun LoginScreen(
@@ -19,9 +21,14 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel()
 ) {
 
+    val context = LocalContext.current
+
     val networkStatus by viewModel.networkStatus.collectAsState()
     var isMemberType by remember { mutableStateOf(true) }
-    val context = LocalContext.current
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.loadToken()
+    })
 
     LoginContent(
         onClickLogin = { isMember, userid, userpw ->
@@ -36,8 +43,13 @@ fun LoginScreen(
     )
 
     if (networkStatus is NetworkStatus.SUCCESS) {
+        val token = LocalTemporaryDataStore.token
         if (isMemberType) {
             val memberData = (networkStatus as NetworkStatus.SUCCESS).data as MemberData
+            if (token.isNotEmpty() && token != memberData.uuid) {
+                memberData.uuid = token
+                viewModel.putMemberData(data = memberData)
+            }
             viewModel.setMemberData(memberData)
             LaunchedEffect(key1 = Unit, block = {
                 navController.popBackStack()
@@ -46,6 +58,10 @@ fun LoginScreen(
             })
         } else {
             val librarianData = (networkStatus as NetworkStatus.SUCCESS).data as LibrarianData
+            if (token.isNotEmpty() && token != librarianData.uuid) {
+                librarianData.uuid = token
+                viewModel.putMemberData(data = librarianData)
+            }
             viewModel.setLibrarianData(librarianData)
             LaunchedEffect(key1 = Unit, block = {
                 navController.popBackStack()

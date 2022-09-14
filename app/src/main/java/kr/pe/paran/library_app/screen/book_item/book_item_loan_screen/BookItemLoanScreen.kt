@@ -32,6 +32,7 @@ fun BookItemLoanScreen(navController: NavController, viewModel: BookViewModel = 
         })
     }
 
+
     // Scan 한 후 전달받은 BarCode
     navController.currentBackStackEntry?.savedStateHandle?.getStateFlow("code", "")
         ?.collectAsState()?.let { barCode ->

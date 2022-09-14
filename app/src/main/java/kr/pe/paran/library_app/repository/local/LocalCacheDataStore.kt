@@ -16,6 +16,7 @@ import kotlinx.serialization.json.Json
 import kr.pe.paran.library_app.model.LibrarianData
 import kr.pe.paran.library_app.model.MemberData
 import kr.pe.paran.library_app.repository.CacheDataStore
+import kr.pe.paran.library_app.utils.Logcat
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "local_data_store")
@@ -27,6 +28,7 @@ class LocalCacheDataStore(context: Context) : CacheDataStore {
     private object PreferenceKey {
         val memberDataKey = stringPreferencesKey("MemberData")
         val librarianDataKey = stringPreferencesKey("LibrarianData")
+        val tokenKey = stringPreferencesKey("Token")
     }
 
 
@@ -64,4 +66,16 @@ class LocalCacheDataStore(context: Context) : CacheDataStore {
         }
     }
 
+    override suspend fun saveToken(token: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKey.tokenKey] = token
+        }
+    }
+
+    override suspend fun loadToken(): Flow<String> {
+        return dataStore.data.map {
+            Logcat.i("::Token>${it[PreferenceKey.tokenKey]}")
+            it[PreferenceKey.tokenKey] ?: ""
+        }
+    }
 }
