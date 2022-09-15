@@ -14,4 +14,4 @@ Genie Library Android App
 
 ### 도서관 사서화면
 ![Screenshot_20220915-063355_LibraryApp](https://user-images.githubusercontent.com/46265496/190290290-8e993e3c-68fb-4498-9dc7-dd1bdbd8b82a.jpg)
-![Screenshot_20220915-063400_LibraryApp](https://user-images.githubusercontent.com/46265496/190290292-07463d1d-ade4-4e33-8711-64295c956264.jpg)
+![Screenshot_20220915-062255_LibraryApp](https://user-images.githubusercontent.com/46265496/190292154-0218fe05-a41c-4f03-be8f-44507c8f9994.jpg)
