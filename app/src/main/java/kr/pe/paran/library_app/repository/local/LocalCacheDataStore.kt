@@ -51,7 +51,7 @@ class LocalCacheDataStore(context: Context) : CacheDataStore {
 
     override suspend fun loadLibrarianData(): Flow<LibrarianData> {
         return dataStore.data.map {
-            val jsonData = it[PreferenceKey.memberDataKey]
+            val jsonData = it[PreferenceKey.librarianDataKey]
             if (jsonData == null) {
                 LibrarianData()
             } else {

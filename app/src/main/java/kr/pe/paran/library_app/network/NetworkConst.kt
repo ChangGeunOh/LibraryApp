@@ -33,6 +33,7 @@ object NetworkConst {
     const val REQUEST_LOAN_BOOK_ITEM = 3300
     const val REQUEST_CODE_BOOK_ITEM = 3400
     const val REQUEST_UPDATE_BOOK_ITEM = 3500
+    const val REQUEST_RETURN_BOOK_ITEM = 3600
 
     const val REQUEST_CODE_MEMBER = 4000
 

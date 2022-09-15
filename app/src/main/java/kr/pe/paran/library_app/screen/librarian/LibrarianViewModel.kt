@@ -1,7 +1,12 @@
 package kr.pe.paran.library_app.screen.librarian
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kr.pe.paran.library_app.model.AccountData
 import kr.pe.paran.library_app.model.LibrarianData
 import kr.pe.paran.library_app.model.MemberData
@@ -14,11 +19,14 @@ class LibrarianViewModel @Inject constructor(
     private val repository: Repository
 ): ViewModel() {
 
-    val librarianData = LibrarianData(
-        id = 1,
-        personData = PersonData(name = "진지현"),
-        cardNumber = "1234567890",
-        barCode = "1234-4567-8901-1234",
-        accountData = AccountData()
-    )
+    private var _librarianData = MutableStateFlow<LibrarianData>(LibrarianData())
+    var librarianData = _librarianData.asStateFlow()
+
+    fun loadLibrarianData() {
+        viewModelScope.launch {
+            repository.loadLoginLibrarianData().collectLatest {
+                _librarianData.value = it
+            }
+        }
+    }
 }

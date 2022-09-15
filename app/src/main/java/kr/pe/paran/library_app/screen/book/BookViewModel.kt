@@ -16,6 +16,7 @@ import kr.pe.paran.library_app.network.NetworkConst.REQUEST_INSERT_AUTHOR
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_INSERT_BOOK
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_INSERT_BOOK_ITEM
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_LOAN_BOOK_ITEM
+import kr.pe.paran.library_app.network.NetworkConst.REQUEST_RETURN_BOOK_ITEM
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_STATUS_BOOK_ITEM
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_SEARCH_AUTHOR
 import kr.pe.paran.library_app.network.NetworkConst.REQUEST_SEARCH_BOOK
@@ -179,6 +180,39 @@ class BookViewModel @Inject constructor(
     }
 
     /** <-------------------------- BookItemManagerScreen.kt */
+
+
+    /** BookItemReturnScreen.kt ---------------------------> */
+    /**  도서 반납 처리                                         */
+
+    // 도서 대여하기 (상태변경 : Idle -> Loaned)
+    fun returnBookItem(memberCard: String, bookItemList: List<BookItemData>) {
+        _networkStatus.value = NetworkStatus.LOADING
+        viewModelScope.launch {
+            bookItemList.forEach {
+                val bookItemStatusData = BookItemStatusData(
+                    bookItemBarCode = it.barCode,
+                    memberCardCode = memberCard,
+                    bookItemStatus = BookStatus.Available
+                )
+
+                val networkStatus = repository.updateBookItemStatus(
+                    reserveData = bookItemStatusData,
+                    request = REQUEST_RETURN_BOOK_ITEM
+                )
+                processNetworkStatus(networkStatus = networkStatus)?.let { data ->
+                    val bookItemData = data as BookItemData
+                    _bookItemList.value.removeIf { item ->
+                        item.barCode == bookItemData.barCode
+                    }
+                }
+            }
+            _message.value = "도서 반납 처리를 하였습니다."
+        }
+    }
+
+    /** <--------------------------- BookItemReturnScreen.kt */
+
 
     fun insertBookItem(bookItemData: BookItemData) {
         _networkStatus.value = NetworkStatus.LOADING

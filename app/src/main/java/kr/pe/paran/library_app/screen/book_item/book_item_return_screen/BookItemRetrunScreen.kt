@@ -62,7 +62,7 @@ fun BookItemReturnScreen(
                 viewModel.removeBookItem(it)
             },
             onClickUpdate = {
-                viewModel.loanBookItem(memberCard = memberCardNumber, bookItemList = bookItemList)
+                viewModel.returnBookItem(memberCard = memberCardNumber, bookItemList = bookItemList)
             },
             onClickScanner = {
                 navController.navigate(Screen.Scanner.route)

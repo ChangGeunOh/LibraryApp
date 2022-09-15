@@ -101,6 +101,10 @@ class Repository @Inject constructor(
         return localDataStore.loadMemberData()
     }
 
+    suspend fun loadLoginLibrarianData(): Flow<LibrarianData> {
+        return localDataStore.loadLibrarianData()
+    }
+
     suspend fun saveToken(token: String) {
         localDataStore.saveToken(token = token)
     }
