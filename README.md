@@ -5,7 +5,7 @@ Genie Library Android App
 
 ### Splash / Login 화면
 ![Screenshot_20220915-054248_LibraryApp](https://user-images.githubusercontent.com/46265496/190290280-6f9ed883-bf4f-4dac-aa66-5787e480653d.jpg)
-![Screenshot_20220915-054229_LibraryApp](https://user-images.githubusercontent.com/46265496/190290274-b39d75f0-d919-47d6-96fd-36484fa1ad96.jpg)
+![Screenshot_20220915-054229_LibraryApp](https://user-images.githubusercontent.com/46265496/190291224-ba1f6264-ce82-412c-9ef3-005d13180fb1.jpg)
 
 ### 회원 화면
 ![Screenshot_20220915-063411_LibraryApp](https://user-images.githubusercontent.com/46265496/190290295-5017ac63-d67f-451c-9e2c-e2f5a9931164.jpg)
